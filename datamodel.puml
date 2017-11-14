@@ -1,19 +1,65 @@
-@startuml
 hide circle
-hide empty members
+'hide empty members
 skinparam classFontStyle bold
 skinparam monochrome true
 hide methods
-hide stereotypes
-top to bottom direction
-'skinparam linetype polyline
+'hide stereotypes
+'top to bottom direction
+'skinparam linetype ortho
+scale 2
 
-Vendor --> Device :SOLD_BY
-Device --> Rack :LIVES_ON
-Device --> LabModule :BELONGS_TO
-Project --> Device :USES
-Reservation --> Device :NEEDS
-Reservation --> User :MADE_BY
-User --> Project :WORKS_ON
+class Year {
+    value
+}
+class Month {
+    value
+}
+class Day {
+    value
+}
+class Reservation {
+    comment
+}
+class IPBlock {
+    block
+}
+class Device {
+    hostname
+    model
+    serial
+    mgmt_ip
+}
+class User {
+    first_name
+    last_name
+}
+class Vendor {
+    name
+}
+class Rack {
+    position
+}
+class LabModule {
+    module
+}
+class MRV {
+    name
+}
+class Project {
+    name
+    description
+}
 
-@enduml
+Year --> Month : :CHILD
+Month --> Day : :CHILD
+Reservation --> Day : :AT_TIME
+Project --> IPBlock : :RESERVES
+Device --> Vendor : :SOLD_BY
+MRV --> Device : :CONTROLS
+Device --> Rack : :LOCATED_IN
+Device --> LabModule : :USED_FOR
+Project --> Device : :USES
+Reservation --> Device : :REQUIRES
+Reservation --> Project : :MADE_FOR
+User --> Reservation : :CREATED
+User --> Project : :WORKS_ON
