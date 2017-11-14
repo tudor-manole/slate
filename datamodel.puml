@@ -1,0 +1,19 @@
+@startuml
+hide circle
+hide empty members
+skinparam classFontStyle bold
+skinparam monochrome true
+hide methods
+hide stereotypes
+top to bottom direction
+'skinparam linetype polyline
+
+Vendor --> Device :SOLD_BY
+Device --> Rack :LIVES_ON
+Device --> LabModule :BELONGS_TO
+Project --> Device :USES
+Reservation --> Device :NEEDS
+Reservation --> User :MADE_BY
+User --> Project :WORKS_ON
+
+@enduml
